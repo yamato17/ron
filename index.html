@@ -2,34 +2,23 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAP10</title>
-<link rel="stylesheet" type="text/css" href="app.css">
-
-<!-- ウェブアプリマニフェストの読み込み -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="manifest" href="manifest.json">
-<!-- ServiceWorkerの登録 -->
+<title>PWA Sample</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="stage"></canvas>
+<script src="drawer.js"></script>
 <script>
+// ServiceWorker登録：https://developers.google.com/web/fundamentals/primers/service-workers/?hl=ja
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-      .then((reg) => {
-        console.log('Service worker registered.', reg);
-      });
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }).catch(function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+    });
 }
 </script>
-</head>
-
-<body>
-
-<section class="container">
-  <h1 class="title">10秒で何回タップできるか</h1>
-  <button id="js-tapBtn" class="btn-tap" disabled>
-    <span id="js-count"></span><br>タップ!!
-  </button>
-  <div class="time">残り時間 <span id="js-time"></span> 秒</div>
-  <button id="js-startBtn" class="btn">START</button>
-</section>
-
-<script src="app.js"></script>
 </body>
 </html>
